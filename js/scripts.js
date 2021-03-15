@@ -1,4 +1,4 @@
-// Pokemon Data Array
+// GLOBAL Pokemon Data Array
 
 let pokemonList = [{name: "Charmander" , height: 4, type: "Fire" },
 {name: "Pikachu" , height: 2, type: "Electricity" },
@@ -6,11 +6,39 @@ let pokemonList = [{name: "Charmander" , height: 4, type: "Fire" },
 {name: "Oddish" , height: 1, type: "Poison" }
 ];
 
-let pokemonList2 = [{name: "Onix" , height: 6, type: "Stone" },
-{name: "Dragonair" , height: 2, type: "Water" },
+
+// IIEF
+let pokemonRepository = (function (){
+
+// Local Pokemon Data Array
+let pokemons = [{name: "Onix", height: 6, type: "Stone"},
+{name: "Dragonair", height: 2, type: "Water" },
 {name: "Ivysaur", height: 3, type: "Grass"},
-{name: "Butterfree" , height: 1, type: ["Poison", "Flying]"]}
+{name: "Butterfree", height: 1, type: ["Poison", "Flying]"]}
 ];
+
+// Returns all pokemons as an Array
+function getAll(){
+  return pokemons;
+}
+
+// Adds an "item/pokemon" to the back of the Array
+function add(item){
+  return pokemons.push(item);
+}
+
+// Key Values to access the IIEF Local Variables
+return {
+  add: add,
+  getAll: getAll
+};
+
+})();
+
+// Adds a pokemon to the IIEF varibale pokemons
+pokemonRepository.add({name: "Raichu", height: 3});
+
+
 
 
 function printPokemons(pokemonArray2){
@@ -24,7 +52,9 @@ function printPokemons(pokemonArray2){
 
 }
 
-pokemonList.forEach(printPokemons);
+// Prints out the Local Pokemon Array of the IIEF and filters it out through the
+// function printPokemons to output Names and Height
+pokemonRepository.getAll().forEach(printPokemons);
 
 
 
