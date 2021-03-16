@@ -55,4 +55,29 @@ header{
   text-align: left;
   margin: 0 5% 0 5%;
   box-shadow: 4px 15px grey;
+  padding: 4%;
+}
+
+.addPokemon{
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+
+/* Buttons */
+
+#subButton{
+  border: solid 3px lightgrey;
+  border-radius: 15px 50px 30px;
+  background-color: var(--Color-BG);
+  color: var(--Text-Color);
+  width: 100px;
+}
+
+.pikachuImage{
+  height: 90px;
+  width: 80px;
+  position: relative;
+  float: right;
+  margin-top: 190px;
 }
