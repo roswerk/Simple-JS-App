@@ -24,8 +24,17 @@ function getAll(){
 
 // Adds an "item/pokemon" to the back of the Array
 function add(item){
-  return pokemons.push(item);
+  if (typeof item === 'object'){
+
+   if (Object.keys(pokemons[0]).some((key) => key in item)) {
+   return pokemons.push(item);
+ }
 }
+ else{
+   alert("The pokemon you added is not an object");
+ }
+}
+
 
 // Key Values to access the IIEF Local Variables
 return {
@@ -35,9 +44,8 @@ return {
 
 })();
 
-// Adds a pokemon to the IIEF varibale pokemons
-pokemonRepository.add({name: "Raichu", height: 3});
-
+// Add a pokemon to the IIEF varibale pokemons
+pokemonRepository.add({name: "Raichu", height: 3, type: "Electricity"});
 
 
 
@@ -57,27 +65,23 @@ function printPokemons(pokemonArray2){
 pokemonRepository.getAll().forEach(printPokemons);
 
 
+// Get users input and display on screen
+function getPokemon(){
+  let newPokemon = document.getElementById("newPokemon").value;
+  let result = document.getElementById("result");
+    let newPokemonHeight = document.getElementById("newPokemonHeight").value;
+      newPokemonHeight = newPokemonHeight;
+    if (newPokemonHeight !== ""){
+      newPokemon = [ newPokemon +  " (height: " + newPokemonHeight + ")"]
+    }
+    else {
+    newPokemon = [ newPokemon ]
+    }
 
-
-
-
-
-
-// OLD ForLoop Version
-//
-// function printArrayDetails(pokemonArray){
-// // Print all available pokemons in the DOM
-// for (let i=0; i < pokemonArray.length; i++){
-//
-// // If a pokemon has height over 5, display a message "Wow thats huge next to it" - Only one pokemon should evaluate true
-// if (pokemonArray[i].height > 5){
-//     document.write("<p>" + pokemonArray[i].name + " " + "(" + "Height " + pokemonArray[i].height + ")" + " -Wow that Pokemon is HUGE!" + "</p>");
-//   }
-//
-//   else{
-// document.write("<p>" + pokemonArray[i].name + " " + "(" + "Height " + pokemonArray[i].height + ")" + "</p>");}
-// }
-//
-// }
-//
-// printArrayDetails(pokemonList);
+    pokemonRepository.add(newPokemon)
+    if (newPokemonHeight > 5){
+    result.textContent = newPokemon + "-Wow that Pokemon is HUGE!"
+  } else{
+    result.textContent = newPokemon
+    }
+  }
