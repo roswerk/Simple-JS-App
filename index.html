@@ -26,13 +26,29 @@
   </nav>
   </header>
 
+  <h1 class="pokedex-title">Pokedex</h1>
+  <section class="pokedex-section">
 
+<section class="addNewPokemon">
+  <form class="addPokemon" action="index.html" method="post">
+      <label id="newPokemonLabel" for="newPokemon">Add a Pokemon Here</label>
+      <input id="newPokemon" type="text" name="#" value=""> <br>
+        <label id="PokemonLabelHeight" for="newPokemonHeight">Add its height</label>
+        <input id="newPokemonHeight" type="text" name="#" value="">
+      <div class="newPokemonSub">
+      <button type="button" id="subButton" onclick="getPokemon()">Add</button>
+      </div>
+  </form>
+  <div>
+    <p id="result"></p>
+  </div>
 
+</section>
+
+<img src="img/Pikachu.png" alt="pikachu" class="pikachuImage">
   <footer>
 
   </footer>
-  <h1 class="pokedex-title">Pokedex</h1>
-  <section class="pokedex-section">
 
   <script src="js/scripts.js"></script>
   </section>
