@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
   <title>Simple JS App</title>
 </head>
@@ -12,15 +14,44 @@
 <body>
 
   <header>
+  <img src="img/pokemon-logo.png" alt="Pokemon Logo" class="menuLogo">
 
+  <nav>
+   <ul class="navigation_list">
+     <li class="navigation_item navigation_item--active"><a href="#" class="menu_item">Home</a></li>
+     <li class="navigation_item"><a href="#" class="menu_item">Filter</a></li>
+     <li class="navigation_item"><a href="#" class="menu_item">See Pokemons Category</a></li>
+   </ul>
+
+  </nav>
   </header>
 
+  <h1 class="pokedex-title">Pokedex</h1>
+  <section class="pokedex-section">
+
+<section class="addNewPokemon">
+  <form class="addPokemon" action="index.html" method="post">
+      <label id="newPokemonLabel" for="newPokemon">Add a Pokemon Here</label>
+      <input id="newPokemon" type="text" name="#" value=""> <br>
+        <label id="PokemonLabelHeight" for="newPokemonHeight">Add its height</label>
+        <input id="newPokemonHeight" type="text" name="#" value="">
+      <div class="newPokemonSub">
+      <button type="button" id="subButton" onclick="getPokemon()">Add</button>
+      </div>
+  </form>
+  <div>
+    <p id="result"></p>
+  </div>
+
+</section>
+
+<img src="img/Pikachu.png" alt="pikachu" class="pikachuImage">
   <footer>
 
   </footer>
 
   <script src="js/scripts.js"></script>
-
+  </section>
 </body>
 
 </html>
