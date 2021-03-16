@@ -20,7 +20,7 @@ header{
 
 
 .menuLogo{
-  width: 10%;
+  width: 120px;
   float: left;
 }
 
@@ -77,9 +77,9 @@ header{
 .pikachuImage{
   height: 90px;
   width: 80px;
-  position: relative;
+  position: static;
   float: right;
-  margin-top: 190px;
+  margin-top: 30px;
 }
 
 
@@ -99,4 +99,5 @@ header{
   background-color: white;
   color: black;
   border: 2px solid #4caf50;
+  width: 130px;
 }
