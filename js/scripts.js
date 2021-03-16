@@ -35,42 +35,27 @@ function add(item){
  }
 }
 
+// Display pokemons as a ul/li
+function addListItem(pokemon){
+  let pokemonlist = document.querySelector(".pokemon-list");
+  let listPokemon = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = pokemon.name;
+  button.classList.add("button-class");
+  listPokemon.appendChild(button);
+  pokemonlist.appendChild(listPokemon)
+}
+
 
 // Key Values to access the IIEF Local Variables
 return {
   add: add,
-  getAll: getAll
+  getAll: getAll,
+  addListItem: addListItem
 };
 
 
 })();
-
-// // Add a pokemon to the IIEF varibale pokemons -- disabled while trying to accomplis task 1.6
-// pokemonRepository.add({name: "Raichu", height: 3, type: "Electricity"});
-
-
-
-
-/// Based on task 1.6 DOM Manipulation practice, i should disable this code
-
-/// function printPokemons(pokemonArray2){
-///   if (pokemonArray2.height > 5){
-///       document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + " -Wow that Pokemon is HUGE!" + "</p>");
-///     }
-///
-///     else{
-///   document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + "</p>");
-///    }
-///
-/// }
-
-/// // Prints out the Local Pokemon Array of the IIEF and filters it out through the
-/// // function printPokemons to output Names and Height
-
-/// pokemonRepository.getAll().forEach(printPokemons);
-
-
-
 
 
 // Get users input and display on screen
@@ -95,20 +80,9 @@ function getPokemon(){
   }
 
 
-
-
 // Task 1.6 - Add an Ul ----- Unfinished and broken
 
 pokemonRepository.getAll().forEach(function (pokemon){
-     let pokemonlist = document.querySelector(".pokemon-list");
-     let listPokemon = document.createElement('li');
-     let button = document.createElement('button');
-     button.innerText = "place holder";
-     button.classList.add("button-class");
-     listPokemon.appendChild(button);
-     pokemonList.appendChild(listPokemon)
+    pokemonRepository.addListItem(pokemon);
 
 });
-
-
-pokemonRepository.getAll().forEach(pokemon);
