@@ -24,16 +24,9 @@ function getAll(){
 
 // Adds an "item/pokemon" to the back of the Array
 function add(item){
-  if (typeof item === 'object'){
+  return pokemons.push(item);
+}
 
-   if (Object.keys(pokemons[0]).some((key) => key in item)) {
-   return pokemons.push(item);
- }
-}
- else{
-   alert("The pokemon you added is not an object");
- }
-}
 
 // Display pokemons as a ul/li
 function addListItem(pokemon){
@@ -61,8 +54,6 @@ function addListItem(pokemon){
 }
 
 
-
-
 // Key Values to access the IIEF Local Variables
 return {
   add: add,
@@ -72,6 +63,9 @@ return {
 
 
 })();
+
+
+
 
 
 // Get users input and display on screen
