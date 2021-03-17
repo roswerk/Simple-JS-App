@@ -24,45 +24,48 @@ function getAll(){
 
 // Adds an "item/pokemon" to the back of the Array
 function add(item){
-  if (typeof item === 'object'){
-
-   if (Object.keys(pokemons[0]).some((key) => key in item)) {
-   return pokemons.push(item);
- }
+  return pokemons.push(item);
 }
- else{
-   alert("The pokemon you added is not an object");
- }
+
+
+// Display pokemons as a ul/li
+function addListItem(pokemon){
+  // Define pokemonList as a variable using the class selector of the Ul
+  let pokemonlist = document.querySelector(".pokemon-list");
+    // Define listPokemon as the li node
+  let listPokemon = document.createElement('li');
+  // Create a button
+  let button = document.createElement('button');
+  // Set inner text of button
+  button.innerText = pokemon.name;
+
+  // Add event listener to button
+  button.addEventListener("click", showDetails);
+  // Change class name in button
+  button.classList.add("button-class");
+  // Append button to listPokemon (li)
+  listPokemon.appendChild(button);
+  // Append listPokemon to pokemonList (Ul)
+  pokemonlist.appendChild(listPokemon)
+
+  function showDetails(pokemon){
+    console.log(button.innerText);
+  };
 }
 
 
 // Key Values to access the IIEF Local Variables
 return {
   add: add,
-  getAll: getAll
+  getAll: getAll,
+  addListItem: addListItem
 };
+
 
 })();
 
-// Add a pokemon to the IIEF varibale pokemons
-pokemonRepository.add({name: "Raichu", height: 3, type: "Electricity"});
 
 
-
-function printPokemons(pokemonArray2){
-  if (pokemonArray2.height > 5){
-      document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + " -Wow that Pokemon is HUGE!" + "</p>");
-    }
-
-    else{
-  document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + "</p>");
-   }
-
-}
-
-// Prints out the Local Pokemon Array of the IIEF and filters it out through the
-// function printPokemons to output Names and Height
-pokemonRepository.getAll().forEach(printPokemons);
 
 
 // Get users input and display on screen
@@ -70,7 +73,7 @@ function getPokemon(){
   let newPokemon = document.getElementById("newPokemon").value;
   let result = document.getElementById("result");
     let newPokemonHeight = document.getElementById("newPokemonHeight").value;
-      newPokemonHeight = newPokemonHeight;
+
     if (newPokemonHeight !== ""){
       newPokemon = [ newPokemon +  " (height: " + newPokemonHeight + ")"]
     }
@@ -85,3 +88,9 @@ function getPokemon(){
     result.textContent = newPokemon
     }
   }
+
+
+pokemonRepository.getAll().forEach(function (pokemon){
+    pokemonRepository.addListItem(pokemon);
+
+});
