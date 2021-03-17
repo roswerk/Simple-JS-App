@@ -27,57 +27,70 @@ function add(item){
   return pokemons.push(item);
 }
 
+
+// Display pokemons as a ul/li
+function addListItem(pokemon){
+  // Define pokemonList as a variable using the class selector of the Ul
+  let pokemonlist = document.querySelector(".pokemon-list");
+    // Define listPokemon as the li node
+  let listPokemon = document.createElement('li');
+  // Create a button
+  let button = document.createElement('button');
+  // Set inner text of button
+  button.innerText = pokemon.name;
+
+  // Add event listener to button
+  button.addEventListener("click", showDetails);
+  // Change class name in button
+  button.classList.add("button-class");
+  // Append button to listPokemon (li)
+  listPokemon.appendChild(button);
+  // Append listPokemon to pokemonList (Ul)
+  pokemonlist.appendChild(listPokemon)
+
+  function showDetails(pokemon){
+    console.log(button.innerText);
+  };
+}
+
+
 // Key Values to access the IIEF Local Variables
 return {
   add: add,
-  getAll: getAll
+  getAll: getAll,
+  addListItem: addListItem
 };
+
 
 })();
 
-// Adds a pokemon to the IIEF varibale pokemons
-pokemonRepository.add({name: "Raichu", height: 3});
 
 
 
 
-function printPokemons(pokemonArray2){
-  if (pokemonArray2.height > 5){
-      document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + " -Wow that Pokemon is HUGE!" + "</p>");
+// Get users input and display on screen
+function getPokemon(){
+  let newPokemon = document.getElementById("newPokemon").value;
+  let result = document.getElementById("result");
+    let newPokemonHeight = document.getElementById("newPokemonHeight").value;
+
+    if (newPokemonHeight !== ""){
+      newPokemon = [ newPokemon +  " (height: " + newPokemonHeight + ")"]
+    }
+    else {
+    newPokemon = [ newPokemon ]
     }
 
-    else{
-  document.write("<p>" + pokemonArray2.name + " " + "(" + "Height " + pokemonArray2.height + ")" + "</p>");
-   }
-
-}
-
-// Prints out the Local Pokemon Array of the IIEF and filters it out through the
-// function printPokemons to output Names and Height
-pokemonRepository.getAll().forEach(printPokemons);
+    pokemonRepository.add(newPokemon)
+    if (newPokemonHeight > 5){
+    result.textContent = newPokemon + "-Wow that Pokemon is HUGE!"
+  } else{
+    result.textContent = newPokemon
+    }
+  }
 
 
+pokemonRepository.getAll().forEach(function (pokemon){
+    pokemonRepository.addListItem(pokemon);
 
-
-
-
-
-
-// OLD ForLoop Version
-//
-// function printArrayDetails(pokemonArray){
-// // Print all available pokemons in the DOM
-// for (let i=0; i < pokemonArray.length; i++){
-//
-// // If a pokemon has height over 5, display a message "Wow thats huge next to it" - Only one pokemon should evaluate true
-// if (pokemonArray[i].height > 5){
-//     document.write("<p>" + pokemonArray[i].name + " " + "(" + "Height " + pokemonArray[i].height + ")" + " -Wow that Pokemon is HUGE!" + "</p>");
-//   }
-//
-//   else{
-// document.write("<p>" + pokemonArray[i].name + " " + "(" + "Height " + pokemonArray[i].height + ")" + "</p>");}
-// }
-//
-// }
-//
-// printArrayDetails(pokemonList);
+});
