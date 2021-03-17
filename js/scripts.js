@@ -37,14 +37,29 @@ function add(item){
 
 // Display pokemons as a ul/li
 function addListItem(pokemon){
+  // Define pokemonList as a variable using the class selector of the Ul
   let pokemonlist = document.querySelector(".pokemon-list");
+    // Define listPokemon as the li node
   let listPokemon = document.createElement('li');
+  // Create a button
   let button = document.createElement('button');
+  // Set inner text of button
   button.innerText = pokemon.name;
+
+  // Add event listener to button
+  button.addEventListener("click", showDetails(pokemon));
+  // Change class name in button
   button.classList.add("button-class");
+  // Append button to listPokemon (li)
   listPokemon.appendChild(button);
+  // Append listPokemon to pokemonList (Ul)
   pokemonlist.appendChild(listPokemon)
 }
+
+
+function showDetails(pokemon){
+  console.log(pokemon);
+};
 
 
 // Key Values to access the IIEF Local Variables
