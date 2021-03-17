@@ -47,19 +47,20 @@ function addListItem(pokemon){
   button.innerText = pokemon.name;
 
   // Add event listener to button
-  button.addEventListener("click", showDetails(pokemon));
+  button.addEventListener("click", showDetails);
   // Change class name in button
   button.classList.add("button-class");
   // Append button to listPokemon (li)
   listPokemon.appendChild(button);
   // Append listPokemon to pokemonList (Ul)
   pokemonlist.appendChild(listPokemon)
+
+  function showDetails(pokemon){
+    console.log(button.innerText);
+  };
 }
 
 
-function showDetails(pokemon){
-  console.log(pokemon);
-};
 
 
 // Key Values to access the IIEF Local Variables
