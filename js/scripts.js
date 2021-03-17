@@ -95,8 +95,6 @@ function getPokemon(){
   }
 
 
-// Task 1.6 - Add an Ul ----- Unfinished and broken
-
 pokemonRepository.getAll().forEach(function (pokemon){
     pokemonRepository.addListItem(pokemon);
 
