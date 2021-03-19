@@ -1,21 +1,11 @@
-// GLOBAL Pokemon Data Array
-
-let pokemonList = [{name: "Charmander" , height: 4, type: "Fire" },
-{name: "Pikachu" , height: 2, type: "Electricity" },
-{name: "Bulbasaur", height: 7, type: "Grass"},
-{name: "Oddish" , height: 1, type: "Poison" }
-];
-
-
 // IIEF
 let pokemonRepository = (function (){
 
-// Local Pokemon Data Array
-let pokemons = [{name: "Onix", height: 6, type: "Stone"},
-{name: "Dragonair", height: 2, type: "Water" },
-{name: "Ivysaur", height: 3, type: "Grass"},
-{name: "Butterfree", height: 1, type: ["Poison", "Flying]"]}
-];
+// Empty Pokemon Data Array
+let pokemons  = [];
+
+// Load API Data
+let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150";
 
 // Returns all pokemons as an Array
 function getAll(){
@@ -40,7 +30,9 @@ function addListItem(pokemon){
   button.innerText = pokemon.name;
 
   // Add event listener to button
-  button.addEventListener("click", showDetails);
+  button.addEventListener("click", function(event){
+    showDetails(pokemon);
+  })
   // Change class name in button
   button.classList.add("button-class");
   // Append button to listPokemon (li)
@@ -48,17 +40,60 @@ function addListItem(pokemon){
   // Append listPokemon to pokemonList (Ul)
   pokemonlist.appendChild(listPokemon)
 
-  function showDetails(pokemon){
-    console.log(button.innerText);
-  };
+  function showDetails(item){
+    pokemonRepository.loadDetails(item).then(function(){
+      console.log(item);
+    })
 }
+}
+
+// Load data from the API
+function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+// Load pokemon details
+  function loadDetails(item) {
+     let url = item.detailsUrl;
+     return fetch(url).then(function (response) {
+       return response.json();
+     }).then(function (details) {
+       // Add the details to the item
+       item.imageUrl = details.sprites.front_default;
+       item.height = details.height;
+     }).catch(function (error) {
+       console.error(error);
+     });
+   }
+
+   function showDetails(pokemon) {
+     loadDetails(pokemon).then(function () {
+       console.log(pokemon);
+     });
+   }
+
 
 
 // Key Values to access the IIEF Local Variables
 return {
   add: add,
   getAll: getAll,
-  addListItem: addListItem
+  addListItem: addListItem,
+  loadList: loadList,
+  loadDetails: loadDetails,
+  showDetails: showDetails
 };
 
 
@@ -90,7 +125,10 @@ function getPokemon(){
   }
 
 
-pokemonRepository.getAll().forEach(function (pokemon){
-    pokemonRepository.addListItem(pokemon);
 
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
