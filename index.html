@@ -16,10 +16,10 @@
   <header>
   <img src="img/pokemon-logo.png" alt="Pokemon Logo" class="menuLogo">
 
-  <nav>
+  <nav class="nav-bar">
    <ul class="navigation_list">
      <li class="navigation_item navigation_item--active"><a href="#" class="menu_item">Home</a></li>
-     <li class="navigation_item"><a href="#" class="menu_item">Filter</a></li>
+     <li class="navigation_item"><a href="#filter" class="menu_item">Filter</a></li>
      <li class="navigation_item"><a href="#" class="menu_item">See Pokemons Category</a></li>
    </ul>
 
@@ -29,28 +29,42 @@
   <h1 class="pokedex-title">Pokedex</h1>
   <section class="pokedex-section">
 
+
+<section class="pokemonHeader">
+
 <section class="addNewPokemon">
   <form class="addPokemon" action="index.html" method="post">
-      <label id="newPokemonLabel" for="newPokemon">Add a Pokemon Here</label>
+      <label id="newPokemonLabel" for="newPokemon">Add a Pokemon</label> <br>
       <input id="newPokemon" type="text" name="#" value=""> <br>
-        <label id="PokemonLabelHeight" for="newPokemonHeight">Add its height</label>
-        <input id="newPokemonHeight" type="text" name="#" value="">
+<!--  <label id="PokemonLabelHeight" for="newPokemonHeight">Add its height</label>
+      <input id="newPokemonHeight" type="text" name="#" value=""> -->
       <div class="newPokemonSub">
-      <button type="button" id="subButton" onclick="getPokemon()">Add</button>
+      <button type="button" id="subButton" onclick="addPokemon()">Add</button>
       </div>
   </form>
   <div>
     <p id="result"></p>
   </div>
+
+  <!-- Creating filter-->
+  <form id="filter">
+    <label>Search a Pokemon</label> <br>
+    <input type="text" id="myInput" placeholder="Search a Pokemon" title="Type in a pokemon">
+
+  </form>
+</section>
 </section>
 
+
+<!-- loading gif  -->
 <div id="loading">
   <img class="loadingImage" src="img/ajax-loader.gif" alt="loading...">
 </div>
 
+<!--Pokemon List-->
 <div class="pokemon-list">
-
 </div>
+
 
 
 
@@ -62,7 +76,7 @@
 
   <script src="js/promise-polyfill.js"></script>
   <script src="js/fetch-polyfill.js"></script>
-  <script src="js/scripts.js"></script>
+  <script src="js/dynamic/scripts.js"></script>
   </section>
 </body>
 

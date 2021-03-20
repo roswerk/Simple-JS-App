@@ -20,7 +20,7 @@ let pokemonRepository = (function() {
 
   // Display pokemons as a ul/li
   function addListItem(pokemon) {
-    // Define pokemonList as a variable using the class selector of the Ul
+    // Define pokemonList as a variable using the class selector of the div
     let pokemonlist = document.querySelector(".pokemon-list");
     // Define listPokemon as the li node
     let listPokemon = document.createElement('li');
@@ -32,6 +32,7 @@ let pokemonRepository = (function() {
     // Add event listener to button
     button.addEventListener("click", function(event) {
       showDetails(pokemon);
+
     })
     // Change class name in button
     button.classList.add("button-class");
@@ -135,20 +136,38 @@ function getPokemon() {
   let newPokemon = document.getElementById("newPokemon").value;
   let result = document.getElementById("result");
   let newPokemonHeight = document.getElementById("newPokemonHeight").value;
-
-  if (newPokemonHeight !== "") {
-    newPokemon = [newPokemon + " (height: " + newPokemonHeight + ")"]
-  } else {
-    newPokemon = [newPokemon]
-  }
-
   pokemonRepository.add(newPokemon)
-  if (newPokemonHeight > 5) {
-    result.textContent = newPokemon + "-Wow that Pokemon is HUGE!"
-  } else {
-    result.textContent = newPokemon
-  }
 }
+
+function addPokemon(item){
+   // Retrieve data from form imput
+   let newPokemon = document.getElementById("newPokemon").value
+   // Identify Div container of pokemons list
+   let pokemonlist = document.querySelector(".pokemon-list");
+   // Create a list container
+   let listPokemon = document.createElement('li');
+   // // Create a button
+   let button = document.createElement('button');
+   // // Set inner text of button
+   button.innerText = newPokemon;
+
+   button.addEventListener("click", function(event) {
+     pokemonDetailsCreator();
+   })
+   button.classList.add("button-class")
+   // pokemonRepository.addListItem(newPokemon);
+   listPokemon.appendChild(button);
+   // Append listPokemon to pokemonList (Ul)
+   pokemonlist.insertBefore(listPokemon, pokemonlist.firstChild);
+
+   function pokemonDetailsCreator(){
+     pokemonName = newPokemon
+     console.log(pokemonName);
+   }
+}
+
+
+
 
 
 pokemonRepository.loadList().then(function() {
@@ -160,9 +179,31 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
       // Now the data is displayed
       pokemonRepository.addListItem(pokemon);
+
     })
     // Hides the loading gif
     pokemonRepository.hideLoadingMessage();
     // 2000 ms of delay
   }, 1000)
 });
+
+
+
+
+// Filter functionalities
+
+searchPokemonList = document.querySelector(".pokemon-list")
+
+let searchBar = document.forms["filter"].querySelector("input");
+searchBar.addEventListener("keyup", function(e){
+  let term = e.target.value.toLowerCase();
+  let searchPokemons = searchPokemonList.getElementsByTagName("li");
+  Array.from(searchPokemons).forEach(function(searchPokemons){
+        let poke = searchPokemons.firstElementChild.textContent;
+        if ( poke.toLowerCase().indexOf(term) != -1){
+          searchPokemons.style.display = "block";
+        } else{
+          searchPokemons.style.display = "none";
+        }
+  })
+})
