@@ -56,12 +56,21 @@ header{
   margin: 0 5% 0 5%;
   box-shadow: 4px 15px grey;
   padding: 4%;
+  /* display: flex;
+  flex-wrap: wrap; */
 }
 
 .addPokemon{
   margin-bottom: 50px;
   text-align: left;
+
 }
+
+li{
+text-align: left;
+
+}
+
 
 
 /* Buttons */
@@ -100,4 +109,12 @@ header{
   color: black;
   border: 2px solid #4caf50;
   width: 130px;
+}
+
+.loadingImage{
+  display: none;
+}
+
+.show{
+ display: block;
 }
