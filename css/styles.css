@@ -4,6 +4,7 @@
   --Color-BG: #f56c5f;
 }
 
+
 body{
 margin: 20px;
 background-color: var(--Color-BG);
@@ -13,7 +14,8 @@ header{
   width: 100%;
   height: 20px;
   display: inline-block;
-  position: fixed;
+  position: static;
+  padding-bottom: 50px;
 }
 
 
@@ -24,6 +26,7 @@ header{
 .menuLogo{
   width: 120px;
   float: left;
+  margin-left: 10%;
 }
 
 .navigation_item{
@@ -34,7 +37,6 @@ header{
 
 .navigation_list{
   float: right;
-  margin-right: 2%;
 }
 
 .menu_item{
@@ -60,8 +62,6 @@ header{
   box-shadow: 4px 15px grey;
   padding: 4%;
   display: block;
-
-
 }
 
 .addPokemon{
@@ -74,12 +74,14 @@ header{
 #filter{
   float: right;
   display: inline-block;
+  padding-bottom: 50px;
 
 
 }
 
 li{
 text-align: left;
+list-style-type: none;
 }
 
 .pokemon-list{
@@ -138,4 +140,71 @@ text-align: left;
 
 .show{
  display: block;
+}
+
+
+/* Modal */
+
+.modal {
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 15px;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  border: 6px outset var(--Color-BG);
+}
+
+.modal-close {
+  float: right;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  color: #777;
+  text-decoration: underline;
+}
+
+.modal h1 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin-bottom: 0;
+}
+
+#pokemonImage{
+  height: 200px;
+  width: auto;
+  padding: 0 25% 0 25%;
+}
+
+#modal-container {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  /* to show it above other content */
+  z-index: 999;
+
+  /* to allow scrolling if the screen is not high enough*/
+  overflow: auto;
+
+  /* this is used to center the modal */
+  display: grid;
+  text-align: center;
+}
+
+#modal-container{
+  display: none;
+}
+
+#modal-container.is-visible{
+  display: block;
 }
