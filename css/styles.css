@@ -5,37 +5,8 @@
 }
 
 body{
-margin: 20px;
+margin-top: 120px;
 background-color: var(--Color-BG);
-}
-
-header{
-  width: 100%;
-  display: inline-block;
-}
-
-
-
-/* Navi Bar elements */
-
-
-.menuLogo{
-  width: 120px;
-  float: left;
-}
-
-.navigation_item{
-  display: inline-block;
-  text-decoration: none;
-  padding: 0 5px;
-}
-
-.navigation_list{
-  float: right;
-}
-
-.menu_item{
-  color: var(--Text-Color);
 }
 
 /* Body */
@@ -47,31 +18,36 @@ header{
 
 
 
+
 /* JS Content in Body  */
 
 
 .pokedex-section{
   background-color: #FFFFFF;
-  text-align: left;
-  margin: 0 5% 0 5%;
+  margin: 0 23% 0 23%;
   box-shadow: 4px 15px grey;
   padding: 4%;
 }
 
 .addPokemon{
-  margin-bottom: 50px;
   text-align: left;
+  float: left;
 }
 
+.pokemon-list{
+  margin-top: 150px;
+  text-align: center;
+  text-align: left;
+  list-style-type: none;
+}
 
 /* Buttons */
 
 #subButton{
-  border: solid 3px lightgrey;
-  border-radius: 15px 50px 30px;
   background-color: var(--Color-BG);
-  color: var(--Text-Color);
-  width: 100px;
+  font-size: 12px;
+  width: 50px;
+  margin-top: 12px;
 }
 
 .pikachuImage{
@@ -82,22 +58,25 @@ header{
   margin-top: 30px;
 }
 
+/* Loading GIF */
+.loadingImage{
+  display: none;
+  margin-top: 150px;
+}
 
-.button-class{
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: white;
-  color: black;
-  border: 2px solid #4caf50;
-  width: 130px;
+.show{
+ display: block;
+}
+
+.btn-outline-secondary:hover{
+  background-color: var(--Color-BG);
+}
+
+
+/* Modal */
+
+.pokemonImage{
+  height: 200px;
+  width: auto;
+  padding: 0 25% 0 25%;
 }
