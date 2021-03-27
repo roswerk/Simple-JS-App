@@ -23,6 +23,8 @@ let pokemonRepository = (function() {
     let pokemonlist = document.querySelector(".pokemon-list");
     // Define listPokemon as the li node
     let listPokemon = document.createElement('li');
+    // Add bootstrap list-group item class
+    listPokemon.classList.add("list-group-item");
     // Create a button
     let button = document.createElement('button');
     // Add Bootstrap btn propperty
