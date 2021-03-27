@@ -5,7 +5,7 @@ let pokemonRepository = (function() {
   let pokemons = [];
 
   // Load API Data
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50";
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20";
 
   // Returns all pokemons as an Array
   function getAll() {
@@ -49,9 +49,6 @@ let pokemonRepository = (function() {
         $('#exampleModalCenter').modal("show")
 
       })
-
-
-
 
     })
     // Change class name in button
@@ -128,7 +125,6 @@ let pokemonRepository = (function() {
     loadImage = document.querySelector(".loadingImage");
     loadImage.classList.remove("show");
   }
-
 
   // Key Values to access the IIEF Local Variables
   return {
@@ -223,16 +219,13 @@ searchBar.addEventListener("keyup", function(e){
   })
 })
 
-
 // the showModal Function works with the retrieved data from the API
 // and displays it on the bootstrap modal
 
 function showModal(title, height, weight, type, url){
 
-
-let modalTitle = document.getElementById("exampleModalCenterTitle");
+let modalTitle = document.getElementById("modalTitle");
 modalTitle.innerText = title;
-
 
 let pokemonHeight = document.getElementById("exampleModalCenterText1");
 pokemonHeight.innerText = "Height: " + height;
@@ -243,7 +236,7 @@ pokemonWeight.innerText = "Weight: " + weight;
 pokemonWeight.classList.add("modal-body");
 
 let pokemonType = document.getElementById("exampleModalCenterText3");
-pokemonType.innerText = "Types: " + type;
+pokemonType.innerText = "Type: " + type;
 pokemonType.classList.add("modal-body");
 
 let modalImage = document.getElementById("exampleModalCenterText4");
