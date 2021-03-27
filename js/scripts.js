@@ -25,6 +25,8 @@ let pokemonRepository = (function() {
     let listPokemon = document.createElement('li');
     // Create a button
     let button = document.createElement('button');
+    // Add Bootstrap btn propperty
+    button.classList.add("btn","btn-outline-danger");
     // Set inner text of button
     button.innerText = pokemon.name;
 
@@ -46,6 +48,8 @@ let pokemonRepository = (function() {
     })
     // Change class name in button
     button.classList.add("button-class");
+    // Add Bootstrap btn class element
+    button.classList.add("btn", "btn-primary")
     // Append button to listPokemon (li)
     listPokemon.appendChild(button);
     // Append listPokemon to pokemonList (Ul)
@@ -163,6 +167,8 @@ function addPokemon(item){
 
    })
    button.classList.add("button-class")
+   // Add Bootstrap btn class
+   button.classList.add("btn", "btn-primary");
    // pokemonRepository.addListItem(newPokemon);
    listPokemon.appendChild(button);
    // Append listPokemon to pokemonList (Ul)
