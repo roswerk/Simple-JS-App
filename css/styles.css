@@ -106,7 +106,7 @@ background-color: var(--Color-BG);
   margin-bottom: 0;
 }
 
-#pokemonImage{
+.pokemonImage{
   height: 200px;
   width: auto;
   padding: 0 25% 0 25%;

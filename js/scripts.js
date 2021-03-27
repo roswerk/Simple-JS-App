@@ -28,14 +28,16 @@ let pokemonRepository = (function() {
     // Create a button
     let button = document.createElement('button');
     // Add Bootstrap btn propperty
-    button.classList.add("btn","btn-outline-danger");
+    button.classList.add("btn", "btn-outline-secondary");
+
+    // Super low resources solution
+    // button.setAttribute("data-target", "#exampleModalCenter")
+    // button.setAttribute("data-toggle", "modal")
     // Set inner text of button
     button.innerText = pokemon.name;
 
     // Add event listener to button
     button.addEventListener("click", function(event) {
-      // Old version called showDetails which consoled.log the name
-      // showDetails(pokemon);
       loadDetails(pokemon).then(function() {
         let pokemonName = pokemon.name;
         let pokemonDesc = pokemon.height;
@@ -44,14 +46,18 @@ let pokemonRepository = (function() {
         let pokemonType = pokemon.type;
 
         showModal(pokemonName, pokemonDesc, pokemonWeight, pokemonType, pokemonUrl);
+        $('#exampleModalCenter').modal("show")
+
       })
+
+
 
 
     })
     // Change class name in button
     button.classList.add("button-class");
     // Add Bootstrap btn class element
-    button.classList.add("btn", "btn-primary")
+    button.classList.add("btn")
     // Append button to listPokemon (li)
     listPokemon.appendChild(button);
     // Append listPokemon to pokemonList (Ul)
@@ -217,16 +223,33 @@ searchBar.addEventListener("keyup", function(e){
   })
 })
 
+
+
+
+
+
+
+
+
 // Display pokemons in a Modal format
 
+// JS Modal format
+
+
+
 // Create a DIV container for our modal in PokedexSection and set its id to "modal-container"
+/*
 let pokedexSection = document.querySelector(".pokedex-section");
 let modalContainer = document.createElement("div");
-modalContainer.setAttribute("id","modal-container");
+modalContainer.setAttribute("id","modal-container");*/
+// modalContainer.classList.add("modal")
 
 // Insert Modal Container before the pikachu image
+/*
 let pikachuImg = document.querySelector(".pikachuImage")
-pokedexSection.insertBefore(modalContainer, pikachuImg);
+pokedexSection.insertBefore(modalContainer, pikachuImg);*/
+
+/*
 
 // Create a function that makes modalContainer visible
 function showModal(title, height, weight, type, url){
@@ -234,21 +257,27 @@ function showModal(title, height, weight, type, url){
   modalContainer.innerText = " ";
 
   let modal = document.createElement("div");
-  modal.classList.add("modal")
+  modal.classList.add("modalOS")
 
   let closeButton = document.createElement("button");
+  // Add Bootstrap btn class
+  closeButton.classList.add("btn", "btn-light");
   closeButton.classList.add("modal-close");
   closeButton.innerText = "Close";
   closeButton.addEventListener("click", hideModal);
 
   let modalTitle = document.createElement("h1");
   modalTitle.innerText = title;
+  modalTitle.classList.add("modal-title");
   let pokemonHeight = document.createElement("p");
   pokemonHeight.innerText = "Height: " + height;
+  pokemonHeight.classList.add("modal-body");
   let pokemonWeight = document.createElement("p");
   pokemonWeight.innerText = "Weight: " + weight;
+  pokemonWeight.classList.add("modal-body");
   let pokemonType = document.createElement("p");
   pokemonType.innerText = "Types: " + type;
+  pokemonType.classList.add("modal-body");
   let modalImage = document.createElement("img");
   modalImage.src = url;
   modalImage.setAttribute("id", "pokemonImage");
@@ -281,4 +310,36 @@ function showModal(title, height, weight, type, url){
 
 function hideModal(){
   modalContainer.classList.toggle("is-visible");
+}
+
+*/
+
+
+// Bootstrap Modal
+
+function showModal(title, height, weight, type, url){
+
+
+let modalTitle = document.getElementById("exampleModalCenterTitle");
+modalTitle.innerText = title;
+
+
+let pokemonHeight = document.getElementById("exampleModalCenterText1");
+pokemonHeight.innerText = "Height: " + height;
+pokemonHeight.classList.add("modal-body");
+
+let pokemonWeight = document.getElementById("exampleModalCenterText2");
+pokemonWeight.innerText = "Weight: " + weight;
+pokemonWeight.classList.add("modal-body");
+
+let pokemonType = document.getElementById("exampleModalCenterText3");
+pokemonType.innerText = "Types: " + type;
+pokemonType.classList.add("modal-body");
+
+let modalImage = document.getElementById("exampleModalCenterText4");
+modalImage.src = url;
+modalImage.classList.add("pokemonImage");
+
+
+
 }
