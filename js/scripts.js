@@ -224,98 +224,8 @@ searchBar.addEventListener("keyup", function(e){
 })
 
 
-
-
-
-
-
-
-
-// Display pokemons in a Modal format
-
-// JS Modal format
-
-
-
-// Create a DIV container for our modal in PokedexSection and set its id to "modal-container"
-/*
-let pokedexSection = document.querySelector(".pokedex-section");
-let modalContainer = document.createElement("div");
-modalContainer.setAttribute("id","modal-container");*/
-// modalContainer.classList.add("modal")
-
-// Insert Modal Container before the pikachu image
-/*
-let pikachuImg = document.querySelector(".pikachuImage")
-pokedexSection.insertBefore(modalContainer, pikachuImg);*/
-
-/*
-
-// Create a function that makes modalContainer visible
-function showModal(title, height, weight, type, url){
-  modalContainer.classList.add("is-visible");
-  modalContainer.innerText = " ";
-
-  let modal = document.createElement("div");
-  modal.classList.add("modalOS")
-
-  let closeButton = document.createElement("button");
-  // Add Bootstrap btn class
-  closeButton.classList.add("btn", "btn-light");
-  closeButton.classList.add("modal-close");
-  closeButton.innerText = "Close";
-  closeButton.addEventListener("click", hideModal);
-
-  let modalTitle = document.createElement("h1");
-  modalTitle.innerText = title;
-  modalTitle.classList.add("modal-title");
-  let pokemonHeight = document.createElement("p");
-  pokemonHeight.innerText = "Height: " + height;
-  pokemonHeight.classList.add("modal-body");
-  let pokemonWeight = document.createElement("p");
-  pokemonWeight.innerText = "Weight: " + weight;
-  pokemonWeight.classList.add("modal-body");
-  let pokemonType = document.createElement("p");
-  pokemonType.innerText = "Types: " + type;
-  pokemonType.classList.add("modal-body");
-  let modalImage = document.createElement("img");
-  modalImage.src = url;
-  modalImage.setAttribute("id", "pokemonImage");
-
-  modal.appendChild(closeButton);
-  modal.appendChild(modalTitle);
-  modal.appendChild(pokemonHeight);
-  modal.appendChild(pokemonWeight);
-  modal.appendChild(pokemonType);
-  modal.appendChild(modalImage);
-
-  modalContainer.appendChild(modal);
-
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")){
-      hideModal();
-    }
-  })
-
-  modalContainer.addEventListener("click", (e)=>{
-
-    let target = e.target;
-    if(target === modalContainer){
-      hideModal();
-    };
-  })
-}
-
-
-function hideModal(){
-  modalContainer.classList.toggle("is-visible");
-}
-
-*/
-
-
-// Bootstrap Modal
+// the showModal Function works with the retrieved data from the API
+// and displays it on the bootstrap modal
 
 function showModal(title, height, weight, type, url){
 
@@ -339,7 +249,5 @@ pokemonType.classList.add("modal-body");
 let modalImage = document.getElementById("exampleModalCenterText4");
 modalImage.src = url;
 modalImage.classList.add("pokemonImage");
-
-
 
 }
