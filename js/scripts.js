@@ -195,29 +195,74 @@ searchBar.addEventListener("keyup", function(e){
 
 // the showModal Function works with the retrieved data from the API
 // and displays it on the bootstrap modal
+  // Show Modal
+  function showModal(title, height, weight, type, url){
 
-function showModal(title, height, weight, type, url){
+  let modalTitle = document.getElementById("modalTitle");
+  modalTitle.innerText = title;
 
-let modalTitle = document.getElementById("modalTitle");
-modalTitle.innerText = title;
+  let pokemonHeight = document.getElementById("exampleModalCenterText1");
+  pokemonHeight.innerText = "Height: " + height;
+  pokemonHeight.classList.add("modal-body");
 
-let pokemonHeight = document.getElementById("exampleModalCenterText1");
-pokemonHeight.innerText = "Height: " + height;
-pokemonHeight.classList.add("modal-body");
+  let pokemonWeight = document.getElementById("exampleModalCenterText2");
+  pokemonWeight.innerText = "Weight: " + weight;
+  pokemonWeight.classList.add("modal-body");
 
-let pokemonWeight = document.getElementById("exampleModalCenterText2");
-pokemonWeight.innerText = "Weight: " + weight;
-pokemonWeight.classList.add("modal-body");
+  let pokemonType = document.getElementById("exampleModalCenterText3");
+  pokemonType.innerText = "Type: " + type;
+  pokemonType.classList.add("modal-body");
 
-let pokemonType = document.getElementById("exampleModalCenterText3");
-pokemonType.innerText = "Type: " + type;
-pokemonType.classList.add("modal-body");
+  let modalImage = document.getElementById("exampleModalCenterText4");
+  modalImage.src = url;
+  modalImage.classList.add("pokemonImage");
+  }
 
-let modalImage = document.getElementById("exampleModalCenterText4");
-modalImage.src = url;
-modalImage.classList.add("pokemonImage");
 
-}
+
+  // Add users input to pokemons
+  let pokemonObject = {}
+  let pokemonArray = []
+  let addpokemonbutton = document.getElementById("NavAddPokemon");
+
+  // Show modal when clicking "Add Custom Pokemon"
+  addpokemonbutton.addEventListener("click", function(){
+      $('#addPokemonModal').modal("show")
+  })
+
+  let newPokemonName = document.getElementById("addNewPokemonName");
+  let newPokemonType = document.getElementById("addNewPokemonType");
+  let newPokemonHeight = document.getElementById("addNewPokemonHeight");
+  let newPokemonWeight = document.getElementById("addNewPokemonWeight");
+  let newPokemonImgUrl = document.getElementById("addNewPokemonImg");
+
+  let pokemonsInRep = pokemonRepository.getAll()
+
+  function getNewPokemon(){
+    Object.assign(pokemonObject, {name: newPokemonName.value});
+    Object.assign(pokemonObject, {type: newPokemonType.value});
+    Object.assign(pokemonObject, {height: newPokemonHeight.value});
+    Object.assign(pokemonObject, {weight: newPokemonWeight.value});
+    Object.assign(pokemonObject, {imageUrl: newPokemonImgUrl.value});
+
+
+    pokemonRepository.add(pokemonObject)
+  }
+
+  addPokemon.addEventListener("click", function(){
+    getNewPokemon();
+    pokemonRepository.addListItem(pokemonObject);
+
+    console.log(pokemonsInRep)
+    // Erase any previous input in add Pokemon Modal
+    $('#addPokemonModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+  })
+
+
+
+
   // Create a live preview of pokemons
 
   let preview = document.querySelector(".pokedex-preview");

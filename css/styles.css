@@ -51,6 +51,13 @@ background-color: var(--Color-BG);
   margin-top: 12px;
 }
 
+#pokemonModalButton{
+  background-color: var(--Color-BG);
+  font-size: 12px;
+  margin-top: 12px;
+
+}
+
 .pikachuImage{
   height: 90px;
   width: 80px;
