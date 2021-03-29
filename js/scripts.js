@@ -5,7 +5,7 @@ let pokemonRepository = (function() {
   let pokemons = [];
 
   // Load API Data
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20";
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50";
 
   // Returns all pokemons as an Array
   function getAll() {
@@ -30,11 +30,26 @@ let pokemonRepository = (function() {
     // Add Bootstrap btn propperty
     button.classList.add("btn", "btn-outline-secondary");
 
-    // Super low resources solution
-    // button.setAttribute("data-target", "#exampleModalCenter")
-    // button.setAttribute("data-toggle", "modal")
-    // Set inner text of button
     button.innerText = pokemon.name;
+
+    // Testing preview button - not vital code
+    let previewButton = document.createElement("button");
+    previewButton.classList.add("btn", "btn-outline-secondary" , "btn-sm", "float-right" );
+    previewButton.innerText = "Preview";
+
+    previewButton.addEventListener("click", function(event){
+      loadDetails(pokemon).then(function() {
+        let pokemonName = pokemon.name;
+        let pokemonDesc = pokemon.height;
+        let pokemonWeight = pokemon.weight;
+        let pokemonUrl = pokemon.imageUrl;
+        let pokemonType = pokemon.type;
+
+        showPreview(pokemonName, pokemonDesc, pokemonWeight, pokemonType, pokemonUrl);
+
+    })
+  })
+
 
     // Add event listener to button
     button.addEventListener("click", function(event) {
@@ -57,6 +72,10 @@ let pokemonRepository = (function() {
     button.classList.add("btn")
     // Append button to listPokemon (li)
     listPokemon.appendChild(button);
+
+    // Testing Preview
+    listPokemon.append(previewButton);
+
     // Append listPokemon to pokemonList (Ul)
     pokemonlist.appendChild(listPokemon);
 
@@ -139,51 +158,6 @@ let pokemonRepository = (function() {
   };
 })();
 
-// Get users input and display on screen
-function getPokemon() {
-  let newPokemon = document.getElementById("newPokemon").value;
-  let result = document.getElementById("result");
-  let newPokemonHeight = document.getElementById("newPokemonHeight").value;
-  pokemonRepository.add(newPokemon)
-}
-
-function addPokemon(item){
-   // Retrieve data from form imput
-   let newPokemon = document.getElementById("newPokemon").value
-
-   if (!newPokemon){
-     return alert("Please write a pokemon name");
-   };
-
-
-   // Identify Div container of pokemons list
-   let pokemonlist = document.querySelector(".pokemon-list");
-   // Create a list container
-   let listPokemon = document.createElement('li');
-   // // Create a button
-   let button = document.createElement('button');
-   // // Set inner text of button
-   button.innerText = newPokemon;
-
-   button.addEventListener("click", function(event) {
-
-     pokemonDetailsCreator();
-
-   })
-   button.classList.add("button-class")
-   // Add Bootstrap btn class
-   button.classList.add("btn", "btn-primary");
-   // pokemonRepository.addListItem(newPokemon);
-   listPokemon.appendChild(button);
-   // Append listPokemon to pokemonList (Ul)
-   pokemonlist.insertBefore(listPokemon, pokemonlist.firstChild);
-
-   function pokemonDetailsCreator(){
-     pokemonName = newPokemon
-     console.log(pokemonName);
-   }
-}
-
 pokemonRepository.loadList().then(function() {
    // Displays loading gif in site
   pokemonRepository.showLoadingMessage();
@@ -221,26 +195,122 @@ searchBar.addEventListener("keyup", function(e){
 
 // the showModal Function works with the retrieved data from the API
 // and displays it on the bootstrap modal
+  // Show Modal
+  function showModal(title, height, weight, type, url){
 
-function showModal(title, height, weight, type, url){
+  let modalTitle = document.getElementById("modalTitle");
+  modalTitle.innerText = title;
 
-let modalTitle = document.getElementById("modalTitle");
-modalTitle.innerText = title;
+  let pokemonHeight = document.getElementById("exampleModalCenterText1");
+  pokemonHeight.innerText = "Height: " + height;
+  pokemonHeight.classList.add("modal-body");
 
-let pokemonHeight = document.getElementById("exampleModalCenterText1");
-pokemonHeight.innerText = "Height: " + height;
-pokemonHeight.classList.add("modal-body");
+  let pokemonWeight = document.getElementById("exampleModalCenterText2");
+  pokemonWeight.innerText = "Weight: " + weight;
+  pokemonWeight.classList.add("modal-body");
 
-let pokemonWeight = document.getElementById("exampleModalCenterText2");
-pokemonWeight.innerText = "Weight: " + weight;
-pokemonWeight.classList.add("modal-body");
+  let pokemonType = document.getElementById("exampleModalCenterText3");
+  pokemonType.innerText = "Type: " + type;
+  pokemonType.classList.add("modal-body");
 
-let pokemonType = document.getElementById("exampleModalCenterText3");
-pokemonType.innerText = "Type: " + type;
-pokemonType.classList.add("modal-body");
+  let modalImage = document.getElementById("exampleModalCenterText4");
+  modalImage.src = url;
+  modalImage.classList.add("pokemonImage");
+  }
 
-let modalImage = document.getElementById("exampleModalCenterText4");
-modalImage.src = url;
-modalImage.classList.add("pokemonImage");
 
-}
+
+  // Add users input to pokemons
+  let pokemonObject = {}
+  let pokemonArray = []
+  let addpokemonbutton = document.getElementById("NavAddPokemon");
+
+  // Show modal when clicking "Add Custom Pokemon"
+  addpokemonbutton.addEventListener("click", function(){
+      $('#addPokemonModal').modal("show")
+  })
+
+  let newPokemonName = document.getElementById("addNewPokemonName");
+  let newPokemonType = document.getElementById("addNewPokemonType");
+  let newPokemonHeight = document.getElementById("addNewPokemonHeight");
+  let newPokemonWeight = document.getElementById("addNewPokemonWeight");
+  let newPokemonImgUrl = document.getElementById("addNewPokemonImg");
+
+  let pokemonsInRep = pokemonRepository.getAll()
+
+  function getNewPokemon(){
+    Object.assign(pokemonObject, {name: newPokemonName.value});
+    Object.assign(pokemonObject, {type: newPokemonType.value});
+    Object.assign(pokemonObject, {height: newPokemonHeight.value});
+    Object.assign(pokemonObject, {weight: newPokemonWeight.value});
+    Object.assign(pokemonObject, {imageUrl: newPokemonImgUrl.value});
+
+
+    pokemonRepository.add(pokemonObject)
+  }
+
+  addPokemon.addEventListener("click", function(){
+    getNewPokemon();
+    pokemonRepository.addListItem(pokemonObject);
+
+    console.log(pokemonsInRep)
+    // Erase any previous input in add Pokemon Modal
+    $('#addPokemonModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+  })
+
+
+
+
+  // Create a live preview of pokemons
+
+  let preview = document.querySelector(".pokedex-preview");
+  let previewImg = document.createElement("img");
+  let previewBox = document.createElement("div");
+
+  previewImg.src = "https://www.flaticon.es/svg/vstatic/svg/188/188965.svg?token=exp=1617047993~hmac=0abfcf07e17abfe5c6319906901f5058";
+  preview.appendChild(previewBox);
+  previewBox.appendChild(previewImg);
+  previewImg.classList.add("icon")
+
+  previewImg.classList.add("column", "previewImg");
+  previewBox.classList.add("pokedexBox", "col-lg-12", "col-md-12", "col-sm-12", "previewBox");
+
+  let previewData = document.createElement("div");
+  let previewName = document.createElement("h5");
+  previewName.classList.add("previewTitle")
+  let previewType = document.createElement("p");
+  previewType.classList.add("previewType")
+  let previewHeight = document.createElement("p");
+  previewHeight.classList.add("previewHeight")
+  let previewWidth = document.createElement("p");
+  previewWidth.classList.add("previewWidth")
+
+  previewData.appendChild(previewName);
+  previewData.appendChild(previewType);
+  previewData.appendChild(previewHeight);
+  previewData.appendChild(previewWidth);
+
+  preview.appendChild(previewData);
+
+
+  function showPreview(title, height, weight, type, url){
+
+  let previewTitle = document.querySelector(".previewTitle")
+  previewTitle.innerText = title;
+
+  let previewHeight = document.querySelector(".previewHeight");
+  previewHeight.innerText = "Height: " + height;
+
+  let previewWidth = document.querySelector(".previewWidth");
+  previewWidth.innerText = "Weight: " + weight;
+
+
+  let pokemonType = document.querySelector("previewType");
+  previewType.innerText = "Type: " + type;
+
+  let previewBox = document.querySelector(".previewBox");
+  previewImg.src = url;
+  previewImg.classList.remove("icon")
+  }
