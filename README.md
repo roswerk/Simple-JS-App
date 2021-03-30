@@ -10,4 +10,3 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js
 
 Pokemon API:
 https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20
-
