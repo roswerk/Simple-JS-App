@@ -1,0 +1,58 @@
+I know submitting unnecessary files is bad practice, but wanted to submit a clean codebase
+to the final task of Achievement 1.
+
+This lines of code are an attempt to create a "Duplicated Pokemon Preventer" feature for
+the "Add Pokemon" feature. ATM the user can submit an existing pokemon, creating duplicates.
+
+I plan to work on this solution in my spare time to present this project as a valid and well design
+portfolio project, therefore, this dummy code will help me out get the work from this point.
+
+The code above is terrible, i know.. Just need some more time to find a proper solution.
+
+
+
+// Create a functionality that compares user input to existing items
+
+let pokemonsAvailable = pokemonRepository.getAll();
+
+
+function exists(newPokemon) {
+
+  let pokemonsName = newPokemon.name
+  let pokemonExists = [];
+
+  let pokemonAppendedButton2 = document.querySelectorAll(".button-class")
+  pokemonAppendedButton2.forEach(function() {
+    let item = document.querySelector(".button-class")
+    let itemName = item.innerText
+    pokemonExists.push(itemName)
+  })
+  //
+  // console.log(itemName)
+  console.log(pokemonExists)
+
+  if (pokemonExists.includes(pokemonsName)) {
+    console.log("is listed")
+  } else {
+    console.log("is not listed")
+  }
+}
+
+
+//////////////////
+addPokemon.addEventListener("click", function() {
+  getNewPokemon();
+  // console.log(pokemonsAvailable[1].name)
+  // console.log(newPokemonObject.name)
+  // exists(newPokemonObject);
+
+  // Add new pokemon to main Pokemon Array
+  pokemonRepository.add(newPokemonObject)
+  // Add pokemon to the displayed list
+  pokemonRepository.addListItem(newPokemonObject);
+
+  // Erase any previous input in add Pokemon Modal
+  $("#addPokemonModal").on("hidden.bs.modal", function() {
+    $(this).find("form").trigger("reset");
+  })
+})
