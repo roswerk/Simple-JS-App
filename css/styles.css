@@ -1,64 +1,53 @@
-:root{
-  font-family: DotGothic16;
+:root {
   --Text-Color: #FFFFFF;
   --Color-BG: #f56c5f;
 }
 
-body{
-margin-top: 120px;
-background-color: var(--Color-BG);
+body {
+  margin-top: 120px;
+  background-color: var(--Color-BG);
 }
 
 /* Body */
-
-.pokedex-title{
+.pokedex-title {
   text-align: center;
   color: var(--Text-Color);
 }
 
-
-
-
 /* JS Content in Body  */
-
-
-.pokedex-section{
-  background-color: #FFFFFF;
+.pokedex-section {
+  background-color: var(--Text-Color);
   margin: 0 23% 0 23%;
   box-shadow: 4px 15px grey;
   padding: 4%;
-
 }
 
-.addPokemon{
+.addPokemon {
   text-align: left;
   float: left;
 }
 
-.pokemon-list{
+.pokemon-list {
   margin-top: 5%;
-  text-align: center;
   text-align: left;
   list-style-type: none;
 }
 
 /* Buttons */
-
-#subButton{
+#subButton {
   background-color: var(--Color-BG);
   font-size: 12px;
   width: 50px;
   margin-top: 12px;
 }
 
-#pokemonModalButton{
+#pokemonModalButton {
   background-color: var(--Color-BG);
   font-size: 12px;
   margin-top: 12px;
-
 }
 
-.pikachuImage{
+.pikachuImage {
   height: 90px;
   width: 80px;
   position: static;
@@ -67,55 +56,51 @@ background-color: var(--Color-BG);
 }
 
 /* Loading GIF */
-.loadingImage{
+.loadingImage {
   display: none;
-  margin-top: 150px;
 }
 
-.show{
- display: block;
+.show {
+  display: block;
 }
 
-.btn-outline-secondary:hover{
+.btn-outline-secondary:hover {
   background-color: var(--Color-BG);
 }
 
-
 /* Modal */
-
-.pokemonImage{
+.pokemonImage {
   height: 200px;
   width: auto;
   padding: 0 25% 0 25%;
 }
 
-#URL-Help{
-font-size: 10px;
+#URL-Help {
+  font-size: 10px;
 }
 
-
-.pokedexBox{
-  height: 200px;
-  width: 350px;
+.pokedexBox {
   background-color: lightgrey;
-
 }
 
-.previewImg{
-  height: 200px;
-  width: 300px;
+.previewImg {
   float: inherit;
 }
 
-.icon{
-  opacity: 0.2;
-  width: 100px;
-  height: 80px;
-  margin-left: 95px;
-  margin-top: 80px;
+.icon {
+  opacity: 0.03;
 }
 
-.scrollableList{
-  max-height:380px;
-  overflow:auto;
+.scrollableList {
+  max-height: 350px;
+  overflow: auto;
+}
+
+.previewData .previewTitle{
+  font-size: 20px;
+}
+
+.previewData p{
+  font-size: 12px;
+  margin-bottom: 0;
 }
