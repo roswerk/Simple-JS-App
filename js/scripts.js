@@ -5,7 +5,7 @@ let pokemonRepository = (function() {
   let pokemons = [];
 
   // Load API Data
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50";
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=5";
 
   // Returns all pokemons as an Array
   function getAll() {
@@ -34,10 +34,10 @@ let pokemonRepository = (function() {
 
     // Testing preview button - not vital code
     let previewButton = document.createElement("button");
-    previewButton.classList.add("btn", "btn-outline-secondary" , "btn-sm", "float-right" );
+    previewButton.classList.add("btn", "btn-outline-secondary", "btn-sm", "float-right");
     previewButton.innerText = "Preview";
 
-    previewButton.addEventListener("click", function(event){
+    previewButton.addEventListener("click", function(event) {
       loadDetails(pokemon).then(function() {
         let pokemonName = pokemon.name;
         let pokemonDesc = pokemon.height;
@@ -47,8 +47,8 @@ let pokemonRepository = (function() {
 
         showPreview(pokemonName, pokemonDesc, pokemonWeight, pokemonType, pokemonUrl);
 
+      })
     })
-  })
 
 
     // Add event listener to button
@@ -159,7 +159,7 @@ let pokemonRepository = (function() {
 })();
 
 pokemonRepository.loadList().then(function() {
-   // Displays loading gif in site
+  // Displays loading gif in site
   pokemonRepository.showLoadingMessage();
   // Set a 2000 ms timer to simulate a long data loading time
   setTimeout(function() {
@@ -171,7 +171,7 @@ pokemonRepository.loadList().then(function() {
     })
     // Hides the loading gif
     pokemonRepository.hideLoadingMessage();
-    // 2000 ms of delay
+    // 1000 ms of delay
   }, 1000)
 });
 
@@ -180,23 +180,24 @@ pokemonRepository.loadList().then(function() {
 searchPokemonList = document.querySelector(".pokemon-list")
 
 let searchBar = document.forms["filter"].querySelector("input");
-searchBar.addEventListener("keyup", function(e){
+searchBar.addEventListener("keyup", function(e) {
   let term = e.target.value.toLowerCase();
   let searchPokemons = searchPokemonList.getElementsByTagName("li");
-  Array.from(searchPokemons).forEach(function(searchPokemons){
-        let poke = searchPokemons.firstElementChild.textContent;
-        if ( poke.toLowerCase().indexOf(term) != -1){
-          searchPokemons.style.display = "block";
-        } else{
-          searchPokemons.style.display = "none";
-        }
+  Array.from(searchPokemons).forEach(function(searchPokemons) {
+    let poke = searchPokemons.firstElementChild.textContent;
+    if (poke.toLowerCase().indexOf(term) != -1) {
+      searchPokemons.style.display = "block";
+    } else {
+      searchPokemons.style.display = "none";
+    }
   })
 })
 
 // the showModal Function works with the retrieved data from the API
 // and displays it on the bootstrap modal
-  // Show Modal
-  function showModal(title, height, weight, type, url){
+
+// Show Pokemon Modal when clicking name
+function showModal(title, height, weight, type, url) {
 
   let modalTitle = document.getElementById("modalTitle");
   modalTitle.innerText = title;
@@ -216,86 +217,106 @@ searchBar.addEventListener("keyup", function(e){
   let modalImage = document.getElementById("exampleModalCenterText4");
   modalImage.src = url;
   modalImage.classList.add("pokemonImage");
-  }
+}
 
+// Create an object with User input and add it to the main Pokemon Array + on the li displayed on screen
 
+// Select the navBar Add button
+let addpokemonbutton = document.getElementById("NavAddPokemon");
 
-  // Add users input to pokemons
-  let pokemonObject = {}
-  let pokemonArray = []
-  let addpokemonbutton = document.getElementById("NavAddPokemon");
+// Show modal when clicking "Add Custom Pokemon"
+addpokemonbutton.addEventListener("click", function() {
+  $('#addPokemonModal').modal("show")
+})
 
-  // Show modal when clicking "Add Custom Pokemon"
-  addpokemonbutton.addEventListener("click", function(){
-      $('#addPokemonModal').modal("show")
+// Select user input from Add pokemon Modal
+let pokemonObject = {}
+let newPokemonObject;
+
+let newPokemonName = document.getElementById("addNewPokemonName");
+let newPokemonType = document.getElementById("addNewPokemonType");
+let newPokemonHeight = document.getElementById("addNewPokemonHeight");
+let newPokemonWeight = document.getElementById("addNewPokemonWeight");
+let newPokemonImgUrl = document.getElementById("addNewPokemonImg");
+
+function getNewPokemon() {
+  // Append retrieved values to the PokemonObject
+  Object.assign(pokemonObject, {
+    name: newPokemonName.value
+  });
+  Object.assign(pokemonObject, {
+    type: newPokemonType.value
+  });
+  Object.assign(pokemonObject, {
+    height: newPokemonHeight.value
+  });
+  Object.assign(pokemonObject, {
+    weight: newPokemonWeight.value
+  });
+  Object.assign(pokemonObject, {
+    imageUrl: newPokemonImgUrl.value
+  });
+
+  // Lose object pointting reference
+  let string = JSON.stringify(pokemonObject);
+  newPokemonObject = JSON.parse(string);
+}
+
+addPokemon.addEventListener("click", function() {
+  getNewPokemon();
+  // console.log(pokemonsAvailable[1].name)
+  // console.log(newPokemonObject.name)
+  exists(newPokemonObject);
+
+  // Add new pokemon to main Pokemon Array
+  pokemonRepository.add(newPokemonObject)
+  // Add pokemon to the displayed list
+  pokemonRepository.addListItem(newPokemonObject);
+
+  // Erase any previous input in add Pokemon Modal
+  $('#addPokemonModal').on('hidden.bs.modal', function() {
+    $(this).find('form').trigger('reset');
   })
-
-  let newPokemonName = document.getElementById("addNewPokemonName");
-  let newPokemonType = document.getElementById("addNewPokemonType");
-  let newPokemonHeight = document.getElementById("addNewPokemonHeight");
-  let newPokemonWeight = document.getElementById("addNewPokemonWeight");
-  let newPokemonImgUrl = document.getElementById("addNewPokemonImg");
-
-  let pokemonsInRep = pokemonRepository.getAll()
-
-  function getNewPokemon(){
-    Object.assign(pokemonObject, {name: newPokemonName.value});
-    Object.assign(pokemonObject, {type: newPokemonType.value});
-    Object.assign(pokemonObject, {height: newPokemonHeight.value});
-    Object.assign(pokemonObject, {weight: newPokemonWeight.value});
-    Object.assign(pokemonObject, {imageUrl: newPokemonImgUrl.value});
-
-
-    pokemonRepository.add(pokemonObject)
-  }
-
-  addPokemon.addEventListener("click", function(){
-    getNewPokemon();
-    pokemonRepository.addListItem(pokemonObject);
-
-    console.log(pokemonsInRep)
-    // Erase any previous input in add Pokemon Modal
-    $('#addPokemonModal').on('hidden.bs.modal', function () {
-        $(this).find('form').trigger('reset');
-    })
-  })
+})
 
 
 
 
-  // Create a live preview of pokemons
+// Create a live preview of pokemons
 
-  let preview = document.querySelector(".pokedex-preview");
-  let previewImg = document.createElement("img");
-  let previewBox = document.createElement("div");
+let preview = document.querySelector(".pokedex-preview");
+let previewImg = document.createElement("img");
+let previewBox = document.createElement("div");
 
-  previewImg.src = "https://www.flaticon.es/svg/vstatic/svg/188/188965.svg?token=exp=1617047993~hmac=0abfcf07e17abfe5c6319906901f5058";
-  preview.appendChild(previewBox);
-  previewBox.appendChild(previewImg);
-  previewImg.classList.add("icon")
+previewImg.src = "img/pokebola.svg";
+preview.appendChild(previewBox);
+previewBox.appendChild(previewImg);
+previewImg.classList.add("icon")
 
-  previewImg.classList.add("column", "previewImg");
-  previewBox.classList.add("pokedexBox", "col-lg-12", "col-md-12", "col-sm-12", "previewBox");
+previewImg.classList.add("column", "previewImg", "col-lg-12", "col-md-12", "col-sm-12");
+previewBox.classList.add("pokedexBox", "col-lg-12", "col-md-12", "col-sm-12", "previewBox");
 
-  let previewData = document.createElement("div");
-  let previewName = document.createElement("h5");
-  previewName.classList.add("previewTitle")
-  let previewType = document.createElement("p");
-  previewType.classList.add("previewType")
-  let previewHeight = document.createElement("p");
-  previewHeight.classList.add("previewHeight")
-  let previewWidth = document.createElement("p");
-  previewWidth.classList.add("previewWidth")
+let previewData = document.createElement("div");
+previewData.classList.add("previewData")
 
-  previewData.appendChild(previewName);
-  previewData.appendChild(previewType);
-  previewData.appendChild(previewHeight);
-  previewData.appendChild(previewWidth);
+let previewName = document.createElement("h5");
+previewName.classList.add("previewTitle")
+let previewType = document.createElement("p");
+previewType.classList.add("previewType")
+let previewHeight = document.createElement("p");
+previewHeight.classList.add("previewHeight")
+let previewWidth = document.createElement("p");
+previewWidth.classList.add("previewWidth")
 
-  preview.appendChild(previewData);
+previewData.appendChild(previewName);
+previewData.appendChild(previewType);
+previewData.appendChild(previewHeight);
+previewData.appendChild(previewWidth);
+
+preview.appendChild(previewData);
 
 
-  function showPreview(title, height, weight, type, url){
+function showPreview(title, height, weight, type, url) {
 
   let previewTitle = document.querySelector(".previewTitle")
   previewTitle.innerText = title;

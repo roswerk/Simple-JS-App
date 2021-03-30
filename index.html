@@ -14,125 +14,126 @@
 
 <body>
 
-<header class="flex-container">
+  <header class="flex-container">
 
- <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color:#f56c5f;">
-   <a class="navbar-brand" href="#">
-  <img src="img/pokemon-logo.png" alt="Pokemon Logo" class="logo" width="120" height="90">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-  <ul class="navbar-nav justify-content-end ml-auto">
-    <li class="nav-item active">
-        <a href="#" class="nav-link">Home<span class="sr-only">(Current)</span></a>
-    </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link" id="NavAddPokemon">Add Pokemon</a>
-    </li>
-  </ul>
-  <form id="filter" class="form-inline">
-    <br><br>
-    <input type="text" id="myInput" placeholder="Search a Pokemon" title="Type in a pokemon" class="form-control mr-sm-2">
-  </form>
-  </div>
- </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color:#f56c5f;">
+      <a class="navbar-brand" href="#">
+        <img src="img/pokemon-logo.png" alt="Pokemon Logo" class="logo" width="120" height="90">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav justify-content-end ml-auto">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Home<span class="sr-only">(Current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="NavAddPokemon">Add Pokemon</a>
+          </li>
+        </ul>
+        <form id="filter" class="form-inline">
+          <br><br>
+          <input type="text" id="myInput" placeholder="Search a Pokemon" title="Type in a pokemon" class="form-control mr-sm-2">
+        </form>
+      </div>
+    </nav>
   </header>
 
-<h1 class="pokedex-title" id="newPokemonAnchor">Pokedex</h1>
+  <h1 class="pokedex-title" id="newPokemonAnchor">Pokedex</h1>
 
-<section class="pokedex-section">
-  <!-- Add new pokemon Modal -->
+  <section class="pokedex-section">
+    <!-- Add new pokemon Modal -->
 
-  <div class="modal fade" id="addPokemonModal" tabindex="-1" role="dialog" aria-labelledby="addPokemonModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addPokemonModalTitle">Add New Pokemon<span class="sr-only">Add a new Pokemon</span></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <div class="modal fade" id="addPokemonModal" tabindex="-1" role="dialog" aria-labelledby="addPokemonModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addPokemonModalTitle">Add New Pokemon<span class="sr-only">Add a new Pokemon</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
 
-        <form>
-        <div class="column">
-        <input id="addNewPokemonName" type="text" placeholder="Pokemon's Name"><span class="sr-only">New Pokemon Name</span>
-        <input id="addNewPokemonType" type="text" placeholder="Pokemon's Type"><span class="sr-only">New Pokemon Type</span>
-        <br><br>
-        </div>
+            <form>
+              <div class="column">
+                <input id="addNewPokemonName" type="text" placeholder="Pokemon's Name"><span class="sr-only">New Pokemon Name</span>
+                <input id="addNewPokemonType" type="text" placeholder="Pokemon's Type"><span class="sr-only">New Pokemon Type</span>
+                <br><br>
+              </div>
 
-        <div class="column">
-        <input id="addNewPokemonHeight" type="number" placeholder="Pokemon's Height"><span class="sr-only">New Pokemon Height</span>
-        <input id="addNewPokemonWeight" type="number" placeholder="Pokemon's Weight" class="col-5"><span class="sr-only">New Pokemon Weight</span>
-        </div>
-        <br>
+              <div class="column">
+                <input id="addNewPokemonHeight" type="number" placeholder="Pokemon's Height"><span class="sr-only">New Pokemon Height</span>
+                <input id="addNewPokemonWeight" type="number" placeholder="Pokemon's Weight" class="col-5"><span class="sr-only">New Pokemon Weight</span>
+              </div>
+              <br>
 
-        <div class="">
-        <input id="addNewPokemonImg" type="text" placeholder="Add your own Pokemon URL" class="col-10" aria-describedby="URL-Help">
-        <br>
-        <div id="URL-Help" class="form-text">You can copy-paste this link: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png</div>
-        </div>
+              <div class="">
+                <input id="addNewPokemonImg" type="text" placeholder="Add your own Pokemon URL" class="col-10" aria-describedby="URL-Help">
+                <br>
+                <div id="URL-Help" class="form-text">Copy-paste this link and change last digit: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png</div>
+              </div>
 
-        </form>
+            </form>
 
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" id="addPokemon">Add Pokemon</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" id="addPokemon">Add Pokemon</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-<!-- loading gif  -->
-<div id="loading">
-  <img class="loadingImage" src="img/ajax-loader.gif" alt="loading...">
-</div>
+    <!-- loading gif  -->
+    <div id="loading">
+      <img class="loadingImage" src="img/ajax-loader.gif" alt="loading...">
+    </div>
 
 
-<div class="row">
-<!--Pokemon List-->
-<div class="pokemon-list list-group col-lg-6 scrollableList" data-bs-spy="scroll" data-bs-target="list-group-item" data-bs-offset="0" tabindex="0"></div>
-<div class="pokedex-preview col-lg-6">
-  <figure class="figure">
-  <figcaption class="figure-caption">Live Pokemon Previewer</figcaption>
-</figure>
+    <div class="row">
+      <!--Pokemon List-->
+      <div class="pokemon-list list-group col-lg-6 scrollableList" data-bs-spy="scroll" data-bs-target="list-group-item" data-bs-offset="0" tabindex="0"></div>
+      <div class="pokedex-preview col-lg-6">
+        <figure class="figure">
+          <figcaption class="figure-caption">Live Pokemon Previewer</figcaption>
+        </figure>
 
-</div>
-</div>
-<!-- Bootstrap modal -->
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle"><span class="sr-only">Name of the pokemon</span></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <p id="exampleModalCenterText1"><span class="sr-only">Height of the pokemon</span></p>
-      <p id="exampleModalCenterText2"><span class="sr-only">Weight of the pokemon</span></p>
-      <p id="exampleModalCenterText3"><span class="sr-only">Type of the pokemon</span></p>
-      <img id="exampleModalCenterText4" src="#" alt="Image of the pokemon">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
+    <!-- Bootstrap modal -->
 
-<!-- Bottom Pikachu Image -->
-<img src="img/pikachu.png" alt="pikachu" class="pikachuImage">
-</section>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"><span class="sr-only">Name of the pokemon</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="exampleModalCenterText1"><span class="sr-only">Height of the pokemon</span></p>
+            <p id="exampleModalCenterText2"><span class="sr-only">Weight of the pokemon</span></p>
+            <p id="exampleModalCenterText3"><span class="sr-only">Type of the pokemon</span></p>
+            <img id="exampleModalCenterText4" src="#" alt="Image of the pokemon">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Pikachu Image -->
+    <img src="img/pikachu.png" alt="pikachu" class="pikachuImage">
+  </section>
 
   <footer>
+
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
