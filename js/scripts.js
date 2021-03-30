@@ -266,7 +266,7 @@ addPokemon.addEventListener("click", function() {
   getNewPokemon();
   // console.log(pokemonsAvailable[1].name)
   // console.log(newPokemonObject.name)
-  exists(newPokemonObject);
+  // exists(newPokemonObject);
 
   // Add new pokemon to main Pokemon Array
   pokemonRepository.add(newPokemonObject)
