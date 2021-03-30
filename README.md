@@ -10,5 +10,3 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js
 
 Pokemon API:
 https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20
-
-Obs: The ADD POKEMON feature is not ready yet. I'll be uploading the fixed version in a brief.

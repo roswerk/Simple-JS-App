@@ -5,7 +5,7 @@ let pokemonRepository = (function() {
   let pokemons = [];
 
   // Load API Data
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=5";
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150";
 
   // Returns all pokemons as an Array
   function getAll() {
@@ -22,21 +22,23 @@ let pokemonRepository = (function() {
     // Define pokemonList as a variable using the class selector of the div
     let pokemonlist = document.querySelector(".pokemon-list");
     // Define listPokemon as the li node
-    let listPokemon = document.createElement('li');
+    let listPokemon = document.createElement("li");
     // Add bootstrap list-group item class
     listPokemon.classList.add("list-group-item");
     // Create a button
-    let button = document.createElement('button');
+    let button = document.createElement("button");
     // Add Bootstrap btn propperty
     button.classList.add("btn", "btn-outline-secondary");
 
     button.innerText = pokemon.name;
 
-    // Testing preview button - not vital code
+    // Create a Preview Button
     let previewButton = document.createElement("button");
+    // Add Bootstrap class elements to the Preview Button
     previewButton.classList.add("btn", "btn-outline-secondary", "btn-sm", "float-right");
+    // Add "Preview" to the button name
     previewButton.innerText = "Preview";
-
+    // Add event listener to the Preview Button which updates the Live Preview Box
     previewButton.addEventListener("click", function(event) {
       loadDetails(pokemon).then(function() {
         let pokemonName = pokemon.name;
@@ -50,8 +52,7 @@ let pokemonRepository = (function() {
       })
     })
 
-
-    // Add event listener to button
+    // Add event listener to Pokemon Name Button that opens Pokemon Modal
     button.addEventListener("click", function(event) {
       loadDetails(pokemon).then(function() {
         let pokemonName = pokemon.name;
@@ -61,7 +62,7 @@ let pokemonRepository = (function() {
         let pokemonType = pokemon.type;
 
         showModal(pokemonName, pokemonDesc, pokemonWeight, pokemonType, pokemonUrl);
-        $('#exampleModalCenter').modal("show")
+        $("#exampleModalCenter").modal("show")
 
       })
 
@@ -72,8 +73,7 @@ let pokemonRepository = (function() {
     button.classList.add("btn")
     // Append button to listPokemon (li)
     listPokemon.appendChild(button);
-
-    // Testing Preview
+    // Append Preview Button to pokemon List
     listPokemon.append(previewButton);
 
     // Append listPokemon to pokemonList (Ul)
@@ -176,7 +176,6 @@ pokemonRepository.loadList().then(function() {
 });
 
 // Filter functionalities
-
 searchPokemonList = document.querySelector(".pokemon-list")
 
 let searchBar = document.forms["filter"].querySelector("input");
@@ -226,7 +225,7 @@ let addpokemonbutton = document.getElementById("NavAddPokemon");
 
 // Show modal when clicking "Add Custom Pokemon"
 addpokemonbutton.addEventListener("click", function() {
-  $('#addPokemonModal').modal("show")
+  $("#addPokemonModal").modal("show")
 })
 
 // Select user input from Add pokemon Modal
@@ -264,26 +263,19 @@ function getNewPokemon() {
 
 addPokemon.addEventListener("click", function() {
   getNewPokemon();
-  // console.log(pokemonsAvailable[1].name)
-  // console.log(newPokemonObject.name)
-  // exists(newPokemonObject);
-
   // Add new pokemon to main Pokemon Array
   pokemonRepository.add(newPokemonObject)
   // Add pokemon to the displayed list
   pokemonRepository.addListItem(newPokemonObject);
 
   // Erase any previous input in add Pokemon Modal
-  $('#addPokemonModal').on('hidden.bs.modal', function() {
-    $(this).find('form').trigger('reset');
+  $("#addPokemonModal").on("hidden.bs.modal", function() {
+    $(this).find("form").trigger("reset");
   })
 })
 
 
-
-
 // Create a live preview of pokemons
-
 let preview = document.querySelector(".pokedex-preview");
 let previewImg = document.createElement("img");
 let previewBox = document.createElement("div");
@@ -315,7 +307,7 @@ previewData.appendChild(previewWidth);
 
 preview.appendChild(previewData);
 
-
+// Displays the Live Preview with Pokemons data
 function showPreview(title, height, weight, type, url) {
 
   let previewTitle = document.querySelector(".previewTitle")
@@ -327,11 +319,10 @@ function showPreview(title, height, weight, type, url) {
   let previewWidth = document.querySelector(".previewWidth");
   previewWidth.innerText = "Weight: " + weight;
 
-
   let pokemonType = document.querySelector("previewType");
   previewType.innerText = "Type: " + type;
 
   let previewBox = document.querySelector(".previewBox");
   previewImg.src = url;
   previewImg.classList.remove("icon")
-  }
+}
