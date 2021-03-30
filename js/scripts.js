@@ -334,4 +334,32 @@ function showPreview(title, height, weight, type, url) {
   let previewBox = document.querySelector(".previewBox");
   previewImg.src = url;
   previewImg.classList.remove("icon")
+}
+
+
+// Create a functionality that compares user input to existing items
+
+let pokemonsAvailable = pokemonRepository.getAll();
+
+
+function exists(newPokemon) {
+
+  let pokemonsName = newPokemon.name
+  let pokemonExists = [];
+
+  let pokemonAppendedButton2 = document.querySelectorAll(".button-class")
+  pokemonAppendedButton2.forEach(function() {
+    let item = document.querySelector(".button-class")
+    let itemName = item.innerText
+    pokemonExists.push(itemName)
+  })
+  //
+  // console.log(itemName)
+  console.log(pokemonExists)
+
+  if (pokemonExists.includes(pokemonsName)) {
+    console.log("is listed")
+  } else {
+    console.log("is not listed")
   }
+}
